@@ -1,1 +1,1 @@
-export let baseUrl = 'http://43.129.236.240:5174'
+export let baseUrl = 'http://localhost:5174'

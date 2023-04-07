@@ -10,7 +10,7 @@ defineProps({
 
 const usePrinter = () => {
   console.log('print')
-  axios.get(baseUrl + '/print')
+  axios.get(baseUrl + '/printing')
 }
 
 const deleteFiles = () => {
@@ -20,7 +20,7 @@ const deleteFiles = () => {
 
 const stopPrinter = () => {
   console.log('stop')
-  axios.get(baseUrl + '/stop')
+  axios.get(baseUrl + ' /stop')
 }
 
 const count = ref(0)
@@ -38,7 +38,6 @@ const count = ref(0)
         <div class="el-upload__tip tip">
           请先将文件转为pdf文件
         </div>
-        <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
       </template>
     </el-upload>
     <el-button @click="usePrinter" type="primary">打印</el-button>

@@ -17,6 +17,11 @@ app.use(cors())
 
 app.get('/', (req, res, next) => {
     console.log('5174')
+    // res.send("ok")
+})
+
+app.get('/printer', (req, res, next) => {
+    console.log('printer')
     res.send("ok")
 })
 

@@ -1,18 +1,22 @@
 <script setup>
-// import HelloWorld from './components/HelloWorld.vue'
-import Printer from './pages/Printer.vue'
-import Uploadd from './pages/Uploadd.vue';
 </script>
 
 <template>
   <div class="page">
-    <!-- <HelloWorld msg="Vite + Vue" /> -->
-    <!-- <Printer></Printer> -->
-    <Uploadd></Uploadd>
+    <ul>
+      <router-link to="printer">printer</router-link>
+      <router-link to="uploadd">uploadd</router-link>
+    </ul>
+    <router-view></router-view>
   </div>
 </template>
 
 <style scoped>
+
+*{
+  margin: 0;
+  padding: 0;
+}
 .page {
   width: 100vw;
   height: 100vh;

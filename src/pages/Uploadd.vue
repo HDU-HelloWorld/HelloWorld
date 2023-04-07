@@ -1,137 +1,225 @@
-<template>
 
-  <div class="page">
+<script setup lang="ts">
+  import { reactive,ref } from 'vue'
+  import { UploadFilled } from '@element-plus/icons-vue'
+  import type { FormInstance, FormRules } from 'element-plus'
+  import { ElMessage, ElMessageBox } from 'element-plus'
+  import type { UploadProps, UploadUserFile } from 'element-plus'
+  import { baseUrl } from '../../config';
+  import axios from 'axios';
+  const active = ref(0)
+  const formSize = ref('default')
+  const ruleFormRef = ref<FormInstance>()
+  const fileList = ref<UploadUserFile[]>([])
+  const next = async (formEl: FormInstance | undefined) => {
+    if(formEl) await formEl.validate()
+    if (active.value++ == 2) active.value = 2
+  }
+
+  const prev = () => {
+    if (active.value-- == 0) active.value = 0
+  }
+
+  // 表单字段
+  const ruleForm = reactive({
+    name: '',
+    stnum:'',
+    dep:'Web',
+  })
+
+  //表单验证规则
+  const rules = reactive<FormRules>({
+    name: [
+      { required: true, message: 'Please input your name', trigger: 'blur' },
+      { type:'string',min: 1, max: 6, message: 'Length should be 1 to 6', trigger: 'blur' },
+    ],
+    stnum: [
+      { required: true, message: 'Please input your student number', trigger: 'blur' },
+      { type:'string', len:8, message: 'Length should be 8', trigger: 'blur' },
+    ],
+    dep: [
+      {
+        required: true,
+        message: 'Please select Activity department',
+        trigger: 'change',
+      }
+    ]
+  })
+
+  const options = ref([
+    {
+    value: 'web',
+    label: 'Web',
+    },{
+    value: '后端',
+    label: '后端',
+    },{
+    value: '人工智能',
+    label: '人工智能',
+    },
+  ])
+
+  const commit = async function(){
+    console.log(ruleForm)
+    let data ={
+      name:ruleForm.name,
+      stnum:ruleForm.stnum,
+      dep:ruleForm.dep[0],
+    }
+    axios({
+      method: 'post',
+      url: baseUrl+'/identify',
+      data: data
+    })
+  }
+
+  const OnSuccess: UploadProps['onSuccess'] = (response,uploadFile,uploadFiles) => {
+    uploadFile.uid =  response
+  }
+  
+  const beforeRemove: UploadProps['beforeRemove'] = (uploadFile, uploadFiles) => {
+    return ElMessageBox.confirm(
+      `Cancel the transfer of ${uploadFile.name} ?`
+    ).then(
+      () => {     
+        let idx = uploadFile.name.split('.').length-1
+        let type = uploadFile.name.split('.')[idx]
+        let url = uploadFile.uid + "." + type
+        let data ={
+          name:ruleForm.name,
+          stnum:ruleForm.stnum,
+          dep:ruleForm.dep,
+          url:url,
+        }
+        axios.post(baseUrl+'/delfile',data)
+      },
+      () => false,
+    )
+  }
+
+</script>
+
+
+<template>
+  <div class="uploadd">
     <el-form
     ref="ruleFormRef"
     :model="ruleForm"
     :rules="rules"
-    :size="formSize">
-      <el-row justify="center" prop="name">
+    :size="formSize"
+    v-if="!active">
+      <el-row justify="center">
         <el-col :span="4" >
-          <span class="items-center">姓名</span>
-          <el-input
-            v-model="input1"
-            class="name"
-            placeholder="请输入你的姓名"
-          />
-        </el-col>
-      </el-row>
-      <el-row justify="center" prop="stnum">
-        <el-col :span="4" >
-        <span class="items-center">学号</span>
-          <el-input
-            v-model="input2"
-            class="stdnum"
-            placeholder="请输入你的学号"
-          />
-        </el-col>
-      </el-row>
-      <el-row justify="center" class="department" prop="dep">
-        <el-col :span="4" >
-          <span>部门</span>
-          <el-cascader v-model="value" :options="options" @change="handleChange" />
+          <el-form-item label="姓名" prop="name">
+            <el-input
+              v-model="ruleForm.name"
+              class="name"
+              placeholder="请输入你的姓名"
+            />
+          </el-form-item>
         </el-col>
       </el-row>
       <el-row justify="center">
-        <el-col :span="4">
-          <el-upload
-            class="upload-demo"
-            drag
-            action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-            multiple
-          >
-            <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-            <div class="el-upload__text">
-              Drop file here or <em>click to upload</em>
-            </div>
-            <template #tip>
-            <div class="el-upload__tip">
-              jpg/png files with a size less than 500kb
-            </div>
-            </template>
-          </el-upload>
+        <el-col :span="4" >
+          <el-form-item label="学号" prop="stnum">
+            <el-input
+              v-model="ruleForm.stnum"
+              class="stnum"
+              placeholder="请输入你的学号"
+            />
+          </el-form-item>
         </el-col>
       </el-row>
-      <el-row justify="center">
-        <el-button type="submit" plain>提交</el-button>
+      <el-row justify="center" class="department">
+        <el-col :span="4" >
+          <el-form-item label="部门" prop="dep">
+            <el-select-v2
+              v-model="ruleForm.dep"
+              :options="options"
+            />
+          </el-form-item>
+        </el-col>
       </el-row>
+      <!-- <el-row justify="center">
+        <el-button type="submit" plain @click="commit()">下一步</el-button>
+      </el-row> -->
     </el-form>
-    
+    <el-row justify="center" v-if="active===1">
+      <el-col :span="4">
+        <el-upload
+          :data="{name:ruleForm.name,stnum:ruleForm.stnum,dep:ruleForm.dep,id:Date.now()}"
+          ref="upload"
+          class="upload-demo"
+          drag="true"
+          v-model:file-list="fileList"
+          accept = ".png,.jpg,.jpeg"
+          :before-remove="beforeRemove"
+          :on-success="OnSuccess"
+          multiple="true"
+          :show-file-list="true"
+          :action="baseUrl + '/files'"
+        >
+          <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+          <div class="el-upload__text">
+            Drop file here or <em>click to upload</em>
+          </div>
+          <template #tip>
+          <div class="el-upload__tip">
+            jpg/png files with a size less than 500kb
+          </div>
+          </template>
+        </el-upload>
+      </el-col>
+    </el-row>
+    <el-result
+        icon="success"
+        title="Success Tip"
+        sub-title="Please follow the instructions"
+        v-if="active===2"
+      >
+    </el-result>
+    <el-row justify="center" class="progress">
+        <el-col :span="4" >
+          <el-steps :active="active" finish-status="success">
+            <el-step title="Step 1" />
+            <el-step title="Step 2" />
+            <el-step title="Step 3" />
+          </el-steps>
+        </el-col>
+    </el-row>
+    <el-row justify="center" class="btn">
+      <el-col :span="2" >
+        <el-button @click="prev">Prio step</el-button>
+      </el-col>
+      <el-col :span="2.5" >
+        <el-button @click="next(ruleFormRef)">Next step</el-button>
+      </el-col>
+    </el-row>
+
+
   </div>
 </template>
 
 
 
-<script setup lang="ts">
-import { reactive,ref } from 'vue'
-import { UploadFilled } from '@element-plus/icons-vue'
-import type { FormInstance, FormRules } from 'element-plus'
-const formSize = ref('default')
-const ruleFormRef = ref<FormInstance>()
-
-const ruleForm = reactive({
-  name: ' ',
-  stnum:' ',
-  dep:' ',
-
-})
-
-const rules = reactive<FormRules>({
-  name: [
-    { required: true, message: 'Please input your name', trigger: 'blur' },
-    { type:'string',min: 1, max: 6, message: 'Length should be 1 to 6', trigger: 'blur' },
-  ],
-  stnum: [
-    { required: true, message: 'Please input your student number', trigger: 'blur' },
-    { type:'number', len:8, message: 'Length should be 8', trigger: 'blur' },
-  ],
-
-  dep: [
-    {
-      required: true,
-      message: 'Please select Activity department',
-      trigger: 'change',
-    },
-  ],
-})
-
-const input1 = ref('')
-const input2 = ref('')
-
-const value = ref([])
-
-const handleChange = (value) => {
-console.log(value)
-}
-const options = ref([
-{
-  value: 'web',
-  label: 'Web',
-},{
-  value: 'hd',
-  label: '后端',
-},{
-  value: 'rgzn',
-  label: '人工智能',
-},
-])
-</script>
-
-
-
 <style lang="scss">
-  .page{
-    position: absolute;
-    top: 8%;
+  .progress{
+    margin-top: 10vh;
+  }
+  .uploadd{
+    margin-top: 25vh;
   }
   .el-row {
-  margin-bottom: 20px;
+    position: relative;
+    margin: 20px;
   }
 
   .el-cascader {
-    position: fixed;
     display: block;
     text-align: center;
-    width: 245px;
+    // width: 245px;
+  }
+  .el-upload{
+    margin-top: 40px;
   }
 </style>
