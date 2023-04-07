@@ -20,6 +20,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const dataUrl = path.join(__dirname, 'homework')
+const baseURL = './static/upload/'
 
 // 创建 koa 实例
 const app = new Koa()

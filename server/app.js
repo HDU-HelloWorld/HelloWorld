@@ -8,7 +8,6 @@ let app = express()
 const upload = multer({
     dest: './static/upload'
 })
-const baseURL = './static/upload/'
 
 app.use(cors())
 // app.use('/', indexRouter)
