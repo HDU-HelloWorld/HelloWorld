@@ -2,9 +2,11 @@ import Koa from 'koa'
 import multer from '@koa/multer'
 import Router from 'koa-router'
 import cors from 'koa2-cors'
+import shell from 'shelljs'
 import path from 'path'
 import bodyParser from 'koa-bodyparser'
 import fs from 'fs'
+import print from './printer.js'
 //引入数据库
 
 // 获取 __dirname
@@ -136,7 +138,7 @@ router.get('/stop', ctx => {
 router.post('/files', multer({
     dest: './static/upload'
 }).any, ctx => {
-    console.log(req.files)
+    console.log(ctx.request.files)
     ctx.body = '上传成功'
 })
 

@@ -10,7 +10,7 @@ defineProps({
 
 const usePrinter = () => {
   console.log('print')
-  axios.get(baseUrl + '/printing')
+  axios.get(baseUrl + '/print')
 }
 
 const deleteFiles = () => {

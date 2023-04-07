@@ -1,8 +1,6 @@
 import express from 'express'
-import print from './printer.js'
 import cors from 'cors'
 import multer from 'multer'
-import shell from 'shelljs'
 // import indexRouter from './index.js'
 let app = express()
 
