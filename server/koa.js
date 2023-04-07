@@ -6,8 +6,6 @@ import path from 'path'
 import bodyParser from 'koa-bodyparser'
 import fs from 'fs'
 //引入数据库
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient
 
 // 获取 __dirname
 import { dirname } from 'path'
