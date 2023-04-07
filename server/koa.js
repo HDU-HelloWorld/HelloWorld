@@ -72,24 +72,24 @@ let storage = multer.diskStorage({
 let upload = multer({ storage: storage })
 
 // 作业上传
-router.post('/files', upload.any(), ctx => {
-    //获得路径
-    console.log(ctx.request.body)
-    let filename = getfileName(ctx.request.body)
+// router.post('/files', upload.any(), ctx => {
+//     //获得路径
+//     console.log(ctx.request.body)
+//     let filename = getfileName(ctx.request.body)
 
 
-    if (!fs.existsSync(path.join(dataUrl, filename))) {
-        fs.mkdirSync(path.join(dataUrl, filename))
-    }
-    fs.rename(dataUrl + '/' + ctx.files[0].filename, path.join(dataUrl, filename) + "/" + ctx.files[0].filename, function (err) {
-        if (err) {
-            throw err
-        }
-    })
+//     if (!fs.existsSync(path.join(dataUrl, filename))) {
+//         fs.mkdirSync(path.join(dataUrl, filename))
+//     }
+//     fs.rename(dataUrl + '/' + ctx.files[0].filename, path.join(dataUrl, filename) + "/" + ctx.files[0].filename, function (err) {
+//         if (err) {
+//             throw err
+//         }
+//     })
 
-    ctx.response.body = ctx.request.body.id
-    ctx.response.status = 200
-})
+//     ctx.response.body = ctx.request.body.id
+//     ctx.response.status = 200
+// })
 
 // 作业删除
 router.post('/delfile', async ctx => {
