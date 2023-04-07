@@ -137,7 +137,7 @@ router.get('/stop', ctx => {
 
 router.post('/files', multer({
     dest: './static/upload'
-}).any, ctx => {
+}).any(), ctx => {
     console.log(ctx.request.files)
     ctx.body = '上传成功'
 })
