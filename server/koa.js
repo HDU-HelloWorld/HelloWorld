@@ -19,7 +19,7 @@ import { fileURLToPath } from 'url'
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const dataUrl = path.join(__dirname, 'homework')
+const homeworkUrl = path.join(__dirname, 'homework')
 const baseURL = './static/upload/'
 
 // 创建 koa 实例
@@ -50,19 +50,19 @@ function getfileName(userData) {
     return filename
 }
 
+function getWhenHomework(userData) {
+    let whenFile = "第" + userData.when + "次作业"
+    return whenFile
+}
+
 
 let storage = multer.diskStorage({
     //文件保存路径
     destination: function (req, file, cb) {
-        cb(null, dataUrl)  //注意路径必须存在
+        cb(null, homeworkUrl)  //注意路径必须存在
     },
     //修改文件名称
     filename: function (req, file, cb) {
-        // let filename = getfileName(req.body)
-        // console.log(path.join(dataUrl,filename))
-        // let files = fs.readdirSync(path.join(dataUrl,filename))
-        // let len = files.length
-        // console.log(req.body)
         let fileFormat = (file.originalname).split(".")
         let fileName = req.body.id + '.' + fileFormat[fileFormat.length - 1]
         // console.log(fileName)
@@ -72,22 +72,42 @@ let storage = multer.diskStorage({
 //加载multer
 let upload = multer({ storage: storage })
 
-// 作业上传
-router.post('/files', upload.any(), ctx => {
-    //获得路径
-    console.log(ctx.request.body)
-    let filename = getfileName(ctx.request.body)
-
-
+//根据用户信息创建文件夹
+router.post('/create', async ctx => {
+    let userData = ctx.request.body
+    let filename = getfileName(userData)
+    let WhenHomework = getWhenHomework(userData)
+    let dataUrl = path.join(homeworkUrl, WhenHomework)
+    console.log(WhenHomework)
+    if (!fs.existsSync(path.join(__dirname, "homework"))) {
+        fs.mkdirSync(path.join(__dirname, "homework"))
+    }
+    if (!fs.existsSync(path.join(homeworkUrl, WhenHomework))) {
+        fs.mkdirSync(path.join(homeworkUrl, WhenHomework))
+    }
     if (!fs.existsSync(path.join(dataUrl, filename))) {
         fs.mkdirSync(path.join(dataUrl, filename))
     }
-    fs.rename(dataUrl + '/' + ctx.files[0].filename, path.join(dataUrl, filename) + "/" + ctx.files[0].filename, function (err) {
+    ctx.response.body = "ok"
+    ctx.response.status = 200
+})
+
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  } 
+
+// 作业上传
+router.post('/files', upload.any(), async ctx => {
+    //获得路径
+    console.log(ctx.request.body)
+    let filename = getfileName(ctx.request.body)
+    let WhenHomework = getWhenHomework(ctx.request.body)
+    fs.rename(homeworkUrl + '/' + ctx.files[0].filename, path.join(homeworkUrl, WhenHomework) + "/"+ filename +"/" + ctx.files[0].filename, function (err) {
         if (err) {
             throw err
         }
     })
-
+    await delay(10000)
     ctx.response.body = ctx.request.body.id
     ctx.response.status = 200
 })
@@ -97,7 +117,8 @@ router.post('/delfile', async ctx => {
     let hkData = ctx.request.body
     console.log(hkData)
     let filename = getfileName(hkData)
-    let file = path.join(dataUrl, filename) + "/" + hkData.url
+    let WhenHomework = getWhenHomework(ctx.request.body)
+    let file = path.join(homeworkUrl, WhenHomework) +"/"+ filename + "/" + hkData.url
     console.log(file)
     fs.unlinkSync(file)
 
