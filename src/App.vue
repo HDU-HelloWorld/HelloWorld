@@ -3,10 +3,6 @@
 
 <template>
   <div class="page">
-    <ul>
-      <router-link to="printer">printer</router-link>
-      <router-link to="uploadd">uploadd</router-link>
-    </ul>
     <router-view></router-view>
   </div>
 </template>
