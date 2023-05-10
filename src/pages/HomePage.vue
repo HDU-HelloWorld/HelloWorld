@@ -12,8 +12,7 @@
         </div>
         <div class="body">
             <UtilCard v-for="(item, index) in cardData" :key="index" :title="item.title" :content="item.content"
-                :footer="item.footer">
-            </UtilCard>
+                :footer="item.footer" @click="router.push(item.router)"></UtilCard>
         </div>
     </div>
 </template>
@@ -21,6 +20,7 @@
 <script setup>
 import UtilCard from '../components/Home/UtilCard.vue'
 import { ref, onMounted, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 
 const loaded = ref(false)
 const page = ref(null)
@@ -38,6 +38,8 @@ const cardData = [{
     footer: 'Available',
     router: '/homework'
 }]
+
+const router = useRouter()
 </script>
 
 <style scoped lang='less'>
