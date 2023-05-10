@@ -19,7 +19,7 @@
 
 <script setup>
 import UtilCard from '../components/Home/UtilCard.vue'
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const loaded = ref(false)

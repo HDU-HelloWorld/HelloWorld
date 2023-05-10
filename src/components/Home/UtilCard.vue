@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import printer from '../../assets/svg/printer.vue'
+import printer from '../../assets/svg/PrinterIcon.vue'
 
 const props = defineProps({
     title: {
