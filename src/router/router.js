@@ -28,6 +28,3 @@ let router = createRouter({
 })
 
 export default router
-
-
-
