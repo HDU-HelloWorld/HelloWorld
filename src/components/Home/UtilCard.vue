@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import printer from '../../assets/svg/printer.vue'
 
 const props = defineProps({

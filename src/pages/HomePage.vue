@@ -6,14 +6,18 @@
             </div>
         </div>
         <div class="body">
-            <UtilCard title="社团打印机" content="上传文件并通过社团实体打印机打印" footer="Available"></UtilCard>
-            <UtilCard title="作业提交" content="提交日常作业的位置哦（你该不会没做吧）" footer="Available"></UtilCard>
+            <UtilCard title="社团打印机" content="上传文件并通过社团实体打印机打印" footer="Available" @click="router.push('/print')"></UtilCard>
+            <UtilCard title="作业提交" content="提交日常作业的位置哦（你该不会没做吧）" footer="Available" @click="router.push('/homework')">
+            </UtilCard>
         </div>
     </div>
 </template>
 
 <script setup>
 import UtilCard from '../components/Home/UtilCard.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 </script>
 
 <style scoped lang='less'>

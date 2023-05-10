@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
 const printer = () => import('../pages/Printer.vue')
-const uploadd = () => import('../pages/Uploadd.vue')
+const homework = () => import('../pages/Uploadd.vue')
 
 
 const routes = [
@@ -11,14 +11,14 @@ const routes = [
         component: HomePage,
     },
     {
-        path: '/printer',
-        name: 'printer',
+        path: '/print',
+        name: 'print',
         component: printer,
     },
     {
-        path: '/uploadd',
-        name: 'uploadd',
-        component: uploadd,
+        path: '/homework',
+        name: 'homework',
+        component: homework,
     },
 ]
 
