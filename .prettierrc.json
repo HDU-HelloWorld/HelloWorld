@@ -3,7 +3,7 @@
     "tabWidth": 4,
     "jsxSingleQuote": false,
     "singleQuote": true,
-    "endOfLine": "lf",
+    "endOfLine": "auto",
     "semi": false,
     "trailingComma": "es5"
 }
