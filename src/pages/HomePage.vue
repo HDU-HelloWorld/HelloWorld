@@ -17,16 +17,25 @@
                     :title="item.title"
                     :content="item.content"
                     :footer="item.footer"
+                    :icon="item.icon || ''"
                     @click="router.push(item.router)"
-                ></UtilCard>
+                >
+                    <template v-slot:icon>
+                        <component
+                            :is="item.icon ? item.icon : markRaw(DefaultIcon)"
+                        />
+                    </template>
+                </UtilCard>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { markRaw, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import DefaultIcon from '../assets/svg/DefaultIcon.vue'
+import printer from '../assets/svg/PrinterIcon.vue'
 import UtilCard from '../components/Home/UtilCard.vue'
 
 const loaded = ref(false)
@@ -40,6 +49,7 @@ const cardData = [
         content: '上传文件并通过社团实体打印机打印',
         footer: 'Available',
         router: '/print',
+        icon: markRaw(printer),
     },
     {
         title: '作业提交',
