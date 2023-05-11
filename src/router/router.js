@@ -20,6 +20,11 @@ const routes = [
         name: 'homework',
         component: homework,
     },
+    {
+        path: '/link',
+        name: 'link',
+        component: () => import('../pages/Link.vue'),
+    }
 ]
 
 let router = createRouter({

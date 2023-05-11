@@ -9,14 +9,8 @@
             <div class="title-box">HelloWorld</div>
         </div>
         <div class="body">
-            <UtilCard
-                v-for="(item, index) in cardData"
-                :key="index"
-                :title="item.title"
-                :content="item.content"
-                :footer="item.footer"
-                @click="router.push(item.router)"
-            ></UtilCard>
+            <UtilCard v-for="(item, index) in cardData" :key="index" :title="item.title" :content="item.content"
+                :footer="item.footer" @click="router.push(item.router)"></UtilCard>
         </div>
     </div>
 </template>
@@ -44,6 +38,12 @@ const cardData = [
         footer: 'Available',
         router: '/homework',
     },
+    {
+        title: '友链',
+        content: '友情页面',
+        footer: 'Available',
+        router: '/link',
+    }
 ]
 
 const router = useRouter()
