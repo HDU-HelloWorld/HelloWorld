@@ -19,6 +19,7 @@ import 'prismjs/components/prism-json'
 VMdEditor.use(vuepressTheme, {
     Prism,
 })
+import './assets/css/reset.css'
 const app = createApp(App)
 
 app.use(router)
