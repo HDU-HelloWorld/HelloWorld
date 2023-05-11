@@ -10,10 +10,23 @@
         </div>
         <div class="body">
             <div class="card-content">
-                <UtilCard v-for="(item, index) in cardData" class="util-card" :key="index" :title="item.title"
-                    :content="item.content" :footer="item.footer" @click="router.push(item.router)">
+                <UtilCard
+                    v-for="(item, index) in cardData"
+                    class="util-card"
+                    :key="index"
+                    :title="item.title"
+                    :content="item.content"
+                    :footer="item.footer"
+                    @click="
+                        item.router
+                            ? router.push(item.router)
+                            : myWindow.open(item.link)
+                    "
+                >
                     <template v-slot:icon>
-                        <component :is="item.icon ? item.icon : markRaw(DefaultIcon)" />
+                        <component
+                            :is="item.icon ? item.icon : markRaw(DefaultIcon)"
+                        />
                     </template>
                 </UtilCard>
             </div>
@@ -34,6 +47,8 @@ const page = ref(null)
 onMounted(() => {
     loaded.value = true
 })
+// 用于让UtilCard拿到window对象
+const myWindow = ref(null)
 const cardData = [
     {
         title: '社团打印机',
@@ -64,12 +79,17 @@ const cardData = [
         title: 'Chiya控制台',
         content: 'Chiya的koishi控制台',
         footer: 'Available',
-        router: 'http://124.221.89.187:7140',
+        router: '',
+        link: 'http://124.221.89.187:7140',
         icon: markRaw(KoishiIcon),
     },
 ]
 
 const router = useRouter()
+
+onMounted(() => {
+    myWindow.value = window
+})
 </script>
 
 <style scoped lang="less">
