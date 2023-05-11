@@ -34,6 +34,7 @@
 import { markRaw, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import DefaultIcon from '../assets/svg/DefaultIcon.vue'
+import KoishiIcon from '../assets/svg/KoishiIcon.vue'
 import printer from '../assets/svg/PrinterIcon.vue'
 import UtilCard from '../components/Home/UtilCard.vue'
 
@@ -67,6 +68,7 @@ const cardData = [
         content: 'Chiya的koishi控制台',
         footer: 'Available',
         router: 'http://124.221.89.187:7140',
+        icon: markRaw(KoishiIcon),
     },
 ]
 
