@@ -2,11 +2,11 @@ import Koa from 'koa'
 import multer from '@koa/multer'
 import Router from 'koa-router'
 import cors from 'koa2-cors'
-import shell from 'shelljs'
 import path from 'path'
 import bodyParser from 'koa-bodyparser'
 import fs from 'fs'
-import print from './printer.js'
+// 打印机路由
+import printer from './api/printer/index.js'
 //引入数据库
 
 // 获取 __dirname
@@ -93,8 +93,8 @@ router.post('/create', async ctx => {
 })
 
 function delay(time) {
-    return new Promise(resolve => setTimeout(resolve, time));
-  } 
+    return new Promise(resolve => setTimeout(resolve, time))
+}
 
 // 作业上传
 router.post('/files', upload.any(), async ctx => {
@@ -102,7 +102,7 @@ router.post('/files', upload.any(), async ctx => {
     console.log(ctx.request.body)
     let filename = getfileName(ctx.request.body)
     let WhenHomework = getWhenHomework(ctx.request.body)
-    fs.rename(homeworkUrl + '/' + ctx.files[0].filename, path.join(homeworkUrl, WhenHomework) + "/"+ filename +"/" + ctx.files[0].filename, function (err) {
+    fs.rename(homeworkUrl + '/' + ctx.files[0].filename, path.join(homeworkUrl, WhenHomework) + "/" + filename + "/" + ctx.files[0].filename, function (err) {
         if (err) {
             throw err
         }
@@ -118,7 +118,7 @@ router.post('/delfile', async ctx => {
     console.log(hkData)
     let filename = getfileName(hkData)
     let WhenHomework = getWhenHomework(ctx.request.body)
-    let file = path.join(homeworkUrl, WhenHomework) +"/"+ filename + "/" + hkData.url
+    let file = path.join(homeworkUrl, WhenHomework) + "/" + filename + "/" + hkData.url
     console.log(file)
     fs.unlinkSync(file)
 
@@ -126,45 +126,8 @@ router.post('/delfile', async ctx => {
     ctx.response.status = 200
 })
 
-
-// router.get('/print', ctx => {
-//     // 唤醒打印机
-//     shell.exec('cupsenable DeskJet-1110')
-//     // 等待1s后打印
-//     setTimeout(() => {
-//         console.log("printing...")
-//         // 获取./static/upload/下的所有文件名
-//         let files = shell.ls('./static/upload')
-//         // 打印文件名
-//         files.forEach(file => {
-//             print(baseURL + file)
-//             console.log(file)
-//         })
-//         // 打印成功后删除文件
-//         shell.rm('-rf', './static/upload/*')
-//         // print()
-//         ctx.body = 'success'
-//     }, 1000)
-// })
-
-// router.get('/delete', (req, res) => {
-//     shell.rm('-rf', './static/upload/*')
-//     ctx.body = 'success'
-// })
-
-// router.get('/stop', ctx => {
-//     shell.exec('lprm')
-//     ctx.body = 'success'
-// })
-
-// router.post('/files', multer({
-//     dest: './static/upload'
-// }).any(), ctx => {
-//     console.log(ctx.request.files)
-//     ctx.body = '上传成功'
-// })
-
-
+// 将打印机相关的功能的根路由设置为/printer
+router.use('/printer', printer.routes())
 
 app.use(bodyParser())
 // 跨域设置
@@ -172,6 +135,8 @@ app.use(cors())
 
 app.use(router.routes())
 
-app.listen(5174, () => {
-    console.log("starting at port 5174")
+const PORT = 6600
+
+app.listen(PORT, () => {
+    console.log(`starting at http://127.0.0.1:${PORT}`)
 })

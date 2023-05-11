@@ -1,0 +1,12 @@
+{
+  "name": "helloworld-server",
+  "version": "1.0.0",
+  "description": "HelloWorld官网后端",
+  "main": "index.js",
+  "author": "Lycoiref",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  }
+}
