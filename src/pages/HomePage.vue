@@ -17,7 +17,6 @@
                     :title="item.title"
                     :content="item.content"
                     :footer="item.footer"
-                    :icon="item.icon || ''"
                     @click="router.push(item.router)"
                 >
                     <template v-slot:icon>
