@@ -9,14 +9,17 @@
             <div class="title-box">HelloWorld</div>
         </div>
         <div class="body">
-            <UtilCard
-                v-for="(item, index) in cardData"
-                :key="index"
-                :title="item.title"
-                :content="item.content"
-                :footer="item.footer"
-                @click="router.push(item.router)"
-            ></UtilCard>
+            <div class="card-content">
+                <UtilCard
+                    v-for="(item, index) in cardData"
+                    class="util-card"
+                    :key="index"
+                    :title="item.title"
+                    :content="item.content"
+                    :footer="item.footer"
+                    @click="router.push(item.router)"
+                ></UtilCard>
+            </div>
         </div>
     </div>
 </template>
@@ -44,6 +47,18 @@ const cardData = [
         footer: 'Available',
         router: '/homework',
     },
+    {
+        title: '社团资源整合',
+        content: '整理了一些社团资源，欢迎大家上传补充',
+        footer: 'Available',
+        router: '/resource',
+    },
+    {
+        title: 'Chiya控制台',
+        content: 'Chiya的koishi控制台',
+        footer: 'Available',
+        router: 'http://124.221.89.187:7140',
+    },
 ]
 
 const router = useRouter()
@@ -55,6 +70,9 @@ const router = useRouter()
     height: 100vh;
     transition: all 0.3s ease-in-out;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .title {
         width: 100%;
@@ -85,6 +103,13 @@ const router = useRouter()
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+
+        .card-content {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
     }
 
     // 加载蒙板
