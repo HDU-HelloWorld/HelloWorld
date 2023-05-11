@@ -4,6 +4,7 @@ import multer from '@koa/multer'
 import { usePrinter } from './functions.js'
 
 const router = new Router()
+const baseURL = './static/upload/'
 
 router.get('/print', ctx => {
     // 唤醒打印机

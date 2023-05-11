@@ -2,35 +2,34 @@
     <div class="util-card">
         <div class="icon">
             <div class="icon-svg">
-                <printer />
+                <slot name="icon"></slot>
             </div>
         </div>
         <div class="info">
             <div class="title">{{ props.title }}</div>
             <div class="content">{{ props.content }}</div>
             <div v-if="props.footer" class="footer">
-                <div class="point-tip available-point"></div>{{ props.footer }}
+                <div class="point-tip available-point"></div>
+                {{ props.footer }}
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import printer from '../../assets/svg/PrinterIcon.vue'
-
 const props = defineProps({
     title: {
         type: String,
-        default: 'Title'
+        default: 'Title',
     },
     content: {
         type: String,
-        default: 'Content'
+        default: 'Content',
     },
     footer: {
         type: String,
-        default: ''
-    }
+        default: '',
+    },
 })
 </script>
 
