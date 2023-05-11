@@ -4,15 +4,15 @@
         @mouseenter="infoshow = false"
         @mouseleave="infoshow = true"
     >
-        <a href="https://blog.apprehen.space" target="_blank">
+        <a :href="personData.blogUrl" target="_blank">
             <Transition>
                 <div
                     class="info"
                     :class="{ 'is-hovering': infoshow === false }"
                 >
                     <div class="avter">
-                        <img src="../../assets/yueyun/yueyun.jpg" />
-                        <span>月晕</span>
+                        <img :src="personData.avter" />
+                        <span>{{ personData.name }}</span>
                     </div>
                     <span></span>
                 </div>
@@ -24,7 +24,10 @@
                 ></div>
             </Transition>
             <div class="down">
-                <img src="../../assets/yueyun/yueyunbg.png" />
+                <img
+                    :src="personData.bg"
+                    :class="infoshow ? 'nohover-bg' : 'hovering-bg'"
+                />
             </div>
         </a>
     </div>
@@ -33,15 +36,30 @@
 <script setup>
 import { ref } from 'vue'
 const infoshow = ref(true)
+defineProps({
+    personData: {
+        type: Object,
+        required: true,
+    },
+})
 </script>
 <style scoped lang="less">
 .personCard {
     width: 300px;
+    margin-bottom: 50px;
+    border-radius: 8px;
     position: relative;
+    // padding: 5px;
     // 自适应图片高度
     height: 150px;
-    background-color: #ccc;
     cursor: pointer;
+    overflow: hidden;
+    color: #363636;
+    border: 1px solid #fff;
+    &:hover {
+        border: #3b70fc 1px solid;
+        box-shadow: 0 8px 12px -3px rgba(66, 89, 239, 0.137);
+    }
     .info {
         width: 100%;
         height: 100%;
@@ -67,8 +85,13 @@ const infoshow = ref(true)
 
             span {
                 margin-top: 5px;
-                margin-left: -5px;
+                // margin-left: -5px;
                 display: flex;
+                box-shadow: none;
+                color: none;
+                border: none;
+                font-size: 20px;
+                padding: 1px 3px;
                 justify-content: center;
             }
 
@@ -87,7 +110,7 @@ const infoshow = ref(true)
     }
 
     .is-hovering {
-        transform: translateY(-100%);
+        transform: translateY(-102%);
     }
 
     .mask {
@@ -101,10 +124,19 @@ const infoshow = ref(true)
         width: 100%;
         height: 100%;
         display: flex;
-
         img {
             width: 100%;
+            border-radius: 4px;
         }
+        transition: scale 0.5 ease-in-out;
+    }
+    .hovering-bg {
+        scale: (1.15);
+        transition: all 0.5s ease-in-out;
+    }
+    .nohover-bg {
+        scale: (1);
+        transition: all 0.5s ease-in-out;
     }
 }
 </style>

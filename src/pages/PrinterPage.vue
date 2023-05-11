@@ -1,7 +1,6 @@
 <script setup>
 import { UploadFilled } from '@element-plus/icons-vue'
 import axios from 'axios'
-import { ref } from 'vue'
 import { baseUrl } from '../../config'
 
 defineProps({
@@ -24,8 +23,6 @@ const stopPrinter = () => {
     console.log('stop')
     axios.get(printUrl + ' /stop')
 }
-
-const count = ref(0)
 </script>
 
 <template>

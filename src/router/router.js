@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
 const ResourcePage = () => import('../pages/Utils/ResourcePage.vue')
 const GetvipPage = () => import('../pages/Utils/GetvipPage.vue')
-const printer = () => import('../pages/Printer.vue')
+const printer = () => import('../pages/PrinterPage.vue')
 const homework = () => import('../pages/Uploadd.vue')
 
 const routes = [
@@ -34,7 +34,7 @@ const routes = [
     {
         path: '/link',
         name: 'link',
-        component: () => import('../pages/Link.vue'),
+        component: () => import('../pages/LinkPage.vue'),
     },
 ]
 
