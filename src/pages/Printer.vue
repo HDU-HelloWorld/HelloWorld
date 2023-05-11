@@ -1,8 +1,8 @@
 <script setup>
 import { UploadFilled } from '@element-plus/icons-vue'
+import axios from 'axios'
 import { ref } from 'vue'
 import { baseUrl } from '../../config'
-import axios from 'axios'
 
 defineProps({
     msg: String,
@@ -31,15 +31,19 @@ const count = ref(0)
 <template>
     <div class="page">
         <!-- 上传打印文件 -->
-        <el-upload class="upload-demo" drag :action="printUrl + '/files'" accept=".pdf" multiple>
+        <el-upload
+            class="upload-demo"
+            drag
+            :action="printUrl + '/files'"
+            accept=".pdf"
+            multiple
+        >
             <el-icon class="el-icon--upload"><upload-filled /></el-icon>
             <div class="el-upload__text">
                 将文件拖动到此处或<em>点击上传文件</em>
             </div>
             <template #tip>
-                <div class="el-upload__tip tip">
-                    请先将文件转为pdf文件
-                </div>
+                <div class="el-upload__tip tip">请先将文件转为pdf文件</div>
             </template>
         </el-upload>
         <el-button @click="usePrinter" type="primary">打印</el-button>

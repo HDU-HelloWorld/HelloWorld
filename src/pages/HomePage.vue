@@ -6,43 +6,50 @@
             </template>
         </Transition>
         <div class="title">
-            <div class="title-box">
-                HelloWorld
-            </div>
+            <div class="title-box">HelloWorld</div>
         </div>
         <div class="body">
-            <UtilCard v-for="(item, index) in cardData" :key="index" :title="item.title" :content="item.content"
-                :footer="item.footer" @click="router.push(item.router)"></UtilCard>
+            <UtilCard
+                v-for="(item, index) in cardData"
+                :key="index"
+                :title="item.title"
+                :content="item.content"
+                :footer="item.footer"
+                @click="router.push(item.router)"
+            ></UtilCard>
         </div>
     </div>
 </template>
 
 <script setup>
-import UtilCard from '../components/Home/UtilCard.vue'
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import UtilCard from '../components/Home/UtilCard.vue'
 
 const loaded = ref(false)
 const page = ref(null)
 onMounted(() => {
     loaded.value = true
 })
-const cardData = [{
-    title: '社团打印机',
-    content: '上传文件并通过社团实体打印机打印',
-    footer: 'Available',
-    router: '/print'
-}, {
-    title: '作业提交',
-    content: '提交日常作业的位置哦（你该不会没做吧）',
-    footer: 'Available',
-    router: '/homework'
-}]
+const cardData = [
+    {
+        title: '社团打印机',
+        content: '上传文件并通过社团实体打印机打印',
+        footer: 'Available',
+        router: '/print',
+    },
+    {
+        title: '作业提交',
+        content: '提交日常作业的位置哦（你该不会没做吧）',
+        footer: 'Available',
+        router: '/homework',
+    },
+]
 
 const router = useRouter()
 </script>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 .page {
     width: 100vw;
     height: 100vh;
