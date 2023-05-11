@@ -76,6 +76,12 @@ const cardData = [
         router: '/resource',
     },
     {
+        title: '网易云会员',
+        content: '每月领取网易云会员',
+        footer: 'Available',
+        router: '/music/getvip',
+    },
+    {
         title: 'Chiya控制台',
         content: 'Chiya的koishi控制台',
         footer: 'Available',
