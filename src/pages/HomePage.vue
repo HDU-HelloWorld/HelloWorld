@@ -138,6 +138,13 @@ onMounted(() => {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        overflow: scroll;
+        // 隐藏滚动条
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         .card-content {
             display: flex;
