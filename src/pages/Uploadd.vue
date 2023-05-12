@@ -12,13 +12,13 @@
   const ruleFormRef = ref<FormInstance>()
   const fileList = ref<UploadUserFile[]>([])
 
-  const next = async (formEl: FormInstance | undefined) => {
-    if(formEl) await formEl.validate()
-    if(active.value == 0) {
-      let res = await axios.post(baseUrl+'/create',ruleForm)
-      console.log(res)
-    },
-  ])
+//   const next = async (formEl: FormInstance | undefined) => {
+//     if(formEl) await formEl.validate()
+//     if(active.value == 0) {
+//       let res = await axios.post(baseUrl+'/create',ruleForm)
+//       console.log(res)
+//     },
+//   ])
 
 
   const options2 = ref([

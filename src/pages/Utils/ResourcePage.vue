@@ -8,7 +8,8 @@
 
 <script setup>
 import 'github-markdown-css'
-import axios from 'axios'
+// import ResourceMd from '@/assets/markdown/全栈开发教程1.md?raw'
+import ResourceMd from '@/assets/markdown/HelloWorld社团资源.md?raw'
 import uslug from 'uslug'
 import MarkdownIt from 'markdown-it'
 import MarkdownItAnchor from 'markdown-it-anchor'
@@ -16,8 +17,7 @@ import MarkdownItTOC from 'markdown-it-toc-done-right'
 // import { dirname } from 'path'
 import { onMounted, ref } from 'vue'
 
-const markdownUrl = '/src/assets/markdown/HelloWorld社团资源.md'
-// const markdownUrl = '/src/assets/markdown/全栈开发教程1.md'
+// const markdownUrl = '/src/assets/markdown/HelloWorld社团资源.md'
 const markdown = ref('')
 const markdownMenu = ref('')
 const uslugify = (s) => uslug(s)
@@ -45,8 +45,7 @@ const md = new MarkdownIt({
     })
 
 onMounted(async () => {
-    const ResourceMd = await axios.get(markdownUrl)
-    markdown.value = md.render(ResourceMd.data)
+    markdown.value = md.render(ResourceMd)
     setTimeout(() => {
         console.log(document.querySelectorAll('a'))
         for (let anchor of document.querySelectorAll('a')) {
@@ -138,6 +137,12 @@ onMounted(async () => {
     &.active {
         color: #000;
         font-weight: bold;
+    }
+}
+
+.markdown-body {
+    li {
+        list-style: disc;
     }
 }
 </style>
