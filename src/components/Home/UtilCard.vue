@@ -8,8 +8,8 @@
         <div class="info">
             <div class="title">{{ props.title }}</div>
             <div class="content">{{ props.content }}</div>
-            <div v-if="props.footer" class="footer">
-                <div class="point-tip available-point"></div>
+            <div v-if="props.footer" class="footer" :class="pointTip">
+                <div class="point-tip"></div>
                 {{ props.footer }}
             </div>
         </div>
@@ -17,6 +17,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
 const props = defineProps({
     title: {
         type: String,
@@ -31,6 +33,8 @@ const props = defineProps({
         default: '',
     },
 })
+
+let pointTip = ref(props.footer.toLocaleLowerCase())
 </script>
 
 <style lang="less" scoped>
@@ -92,10 +96,38 @@ const props = defineProps({
                 height: 10px;
                 border-radius: 50%;
                 background-color: #999999;
-                margin-right: 5px;
+            }
 
-                &.available-point {
+            &.available {
+                color: #56e215;
+
+                .point-tip {
                     background-color: #56e215;
+                }
+            }
+
+            &.error {
+                color: #ff0000;
+                font-weight: bold;
+
+                .point-tip {
+                    background-color: #ff0000;
+                }
+            }
+
+            &.developing {
+                color: #0084ff;
+
+                .point-tip {
+                    background-color: #0084ff;
+                }
+            }
+
+            &.fixing {
+                color: #999999;
+
+                .point-tip {
+                    background-color: #999999;
                 }
             }
         }

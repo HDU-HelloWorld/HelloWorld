@@ -53,14 +53,14 @@ const cardData = [
     {
         title: '社团打印机',
         content: '上传文件并通过社团实体打印机打印',
-        footer: 'Available',
+        footer: 'Fixing',
         router: '/print',
         icon: markRaw(printer),
     },
     {
         title: '作业提交',
         content: '提交日常作业的位置哦（你该不会没做吧）',
-        footer: 'Available',
+        footer: 'Error',
         router: '/homework',
     },
     {
@@ -78,7 +78,7 @@ const cardData = [
     {
         title: '网易云会员',
         content: '每月领取网易云会员',
-        footer: 'Available',
+        footer: 'Developing',
         router: '/music/getvip',
     },
     {
