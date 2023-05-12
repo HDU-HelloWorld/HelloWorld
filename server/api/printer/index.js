@@ -6,16 +6,16 @@ import { usePrinter } from './functions.js'
 const router = new Router()
 const baseURL = './static/upload/'
 
-router.get('/print', ctx => {
+router.get('/print', (ctx) => {
     // 唤醒打印机
     shell.exec('cupsenable DeskJet-1110')
     // 等待1s后打印
     setTimeout(() => {
-        console.log("printing...")
+        console.log('printing...')
         // 获取./static/upload/下的所有文件名
         let files = shell.ls('./static/upload')
         // 打印文件名
-        files.forEach(file => {
+        files.forEach((file) => {
             usePrinter(baseURL + file)
             console.log(file)
         })
@@ -26,24 +26,28 @@ router.get('/print', ctx => {
     }, 1000)
 })
 
-router.get('/delete', (req, res) => {
+router.get('/delete', (ctx) => {
     shell.rm('-rf', './static/upload/*')
     ctx.body = 'success'
 })
 
-router.get('/stop', ctx => {
+router.get('/stop', (ctx) => {
     shell.exec('lprm')
     ctx.body = 'success'
 })
 
-router.post('/files', multer({
-    dest: './static/upload'
-}).any(), ctx => {
-    console.log(ctx.request.files)
-    ctx.body = '上传成功'
-})
+router.post(
+    '/files',
+    multer({
+        dest: './static/upload',
+    }).any(),
+    (ctx) => {
+        console.log(ctx.request.files)
+        ctx.body = '上传成功'
+    }
+)
 
-router.get('/test', ctx => {
+router.get('/test', (ctx) => {
     ctx.body = 'test'
 })
 
