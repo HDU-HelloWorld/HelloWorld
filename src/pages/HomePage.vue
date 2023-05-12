@@ -139,6 +139,8 @@ onMounted(() => {
         flex-wrap: wrap;
         justify-content: center;
         overflow: scroll;
+        // 禁止左右滚动
+        overflow-x: hidden;
         // 隐藏滚动条
         -ms-overflow-style: none;
         scrollbar-width: none;
