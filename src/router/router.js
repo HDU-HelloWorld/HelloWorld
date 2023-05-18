@@ -1,9 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
+// import UpLoadVue from '../pages/UpLoad.vue'
 const ResourcePage = () => import('../pages/Utils/ResourcePage.vue')
 const GetvipPage = () => import('../pages/Utils/GetvipPage.vue')
 const printer = () => import('../pages/PrinterPage.vue')
-const homework = () => import('../pages/Uploadd.vue')
+const homework = () => import('../pages/UpLoad.vue')
 
 const routes = [
     {
