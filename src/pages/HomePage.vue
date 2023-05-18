@@ -60,7 +60,7 @@ const cardData = [
     {
         title: '作业提交',
         content: '提交日常作业的位置哦（你该不会没做吧）',
-        footer: 'Error',
+        footer: 'Available',
         router: '/homework',
     },
     {
