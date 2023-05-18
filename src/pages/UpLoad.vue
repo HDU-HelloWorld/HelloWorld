@@ -1,9 +1,8 @@
-<!-- eslint-disable prettier/prettier -->
 <script setup>
 import { reactive, ref } from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 import axios from 'axios'
-import baseUrl from '../../config'
+import { baseUrl } from '../../config'
 
 const formData = reactive({
     name: '132',
@@ -132,12 +131,11 @@ const beforeRemove = async (uploadFile, uploadFiles) => {
     }
 }
 
-const test = () =>{
+const test = () => {
     axios.get('http://localhost:6600/upLoader/test').then((res) => {
         console.log(res)
     })
 }
-
 </script>
 
 <template>
