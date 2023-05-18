@@ -5,7 +5,7 @@ import cors from 'koa2-cors'
 import bodyParser from 'koa-bodyparser'
 // 打印机路由
 import printer from './api/printer/index.js'
-import upLoader from './api/upLoader/index.js'
+import upLoader from './api/uploader/index.js'
 //引入数据库
 
 //数据库操作封装
