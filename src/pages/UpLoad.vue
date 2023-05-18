@@ -6,10 +6,10 @@ import axios from 'axios'
 import baseUrl from '../../config'
 
 const formData = reactive({
-    name: '132',
-    stuNum: '12323231',
-    time: '2023-5-18',
-    dep: 'web',
+    name: '',
+    stuNum: '',
+    time: '',
+    dep: '',
     id: null,
 })
 const fileList = ref([])
@@ -74,7 +74,7 @@ const timeOptions = reactive([
     },
 ])
 
-const idx = ref(1)
+const idx = ref(0)
 
 const submitForm = async (formEl) => {
     if (!formEl) {
@@ -82,24 +82,24 @@ const submitForm = async (formEl) => {
         return
     }
     await formEl.validate(async (valid, fields) => {
-        let res = await axios.post(baseUrl + 'upLoader/submit', {
-            name: formData.name,
-            stuNum: formData.stuNum,
-            time: formData.time,
-            dep: formData.dep,
-        })
-        console.log(res)
         if (valid) {
-            // idx.value = 1
+            idx.value = 1
         } else {
             console.log('error submit!', fields)
         }
     })
 }
 
-const resetForm = (formEl) => {
+const resetForm = async (formEl) => {
+    console.log(formEl)
     if (!formEl) return
-    formEl.resetFields()
+    else{
+        formData.name = ''
+        formData.stuNum = ''
+        formData.time = ''
+        formData.dep = ''
+    }
+    await formEl.clearValidate()
 }
 
 const before = () => {
@@ -132,11 +132,11 @@ const beforeRemove = async (uploadFile, uploadFiles) => {
     }
 }
 
-const test = () =>{
-    axios.get('http://localhost:6600/upLoader/test').then((res) => {
-        console.log(res)
-    })
-}
+// const test = () =>{
+//     axios.get('http://localhost:6600/upLoader/test').then((res) => {
+//         console.log(res)
+//     })
+// }
 
 </script>
 
@@ -248,7 +248,6 @@ const test = () =>{
             </el-upload>
             <div class="loaderBtn">
                 <el-button type="primary" @click="before">上一步</el-button>
-                <el-button type="primary" @click="test">test</el-button>
             </div>
         </div>
     </div>
