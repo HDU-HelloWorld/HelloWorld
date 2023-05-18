@@ -5,7 +5,7 @@ import { createDir } from './functions.js'
 
 const router = new Router()
 
-// api: '/upLoader/upload' 上传文件
+// api: '/uploader/upload' 上传文件
 // data:{
 //   dep: '部门',
 //   time: '时间',
@@ -34,7 +34,7 @@ router.post(
     }
 )
 
-// api: '/upLoader/delete' 删除文件
+// api: '/uploader/delete' 删除文件
 // data:{
 //   dep: '部门',
 //   time: '时间',

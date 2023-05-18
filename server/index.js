@@ -5,7 +5,7 @@ import cors from 'koa2-cors'
 import bodyParser from 'koa-bodyparser'
 // 打印机路由
 import printer from './api/printer/index.js'
-import upLoader from './api/uploader/index.js'
+import uploader from './api/uploader/index.js'
 //引入数据库
 
 //数据库操作封装
@@ -21,7 +21,7 @@ const router = new Router()
 // 将打印机相关的功能的根路由设置为/printer
 router.use('/printer', printer.routes())
 // 将上传相关的功能的根路由设置为/upLoader
-router.use('/upLoader', upLoader.routes())
+router.use('/uploader', uploader.routes())
 
 app.use(bodyParser())
 // 跨域设置
