@@ -8,18 +8,22 @@
 
 <script setup>
 import PersonCard from '../components/Link/PersonCard.vue'
+import YueyunAvatar from '@/assets/yueyun/avatar.jpg'
+import YueyunBg from '@/assets/yueyun/bg.png'
+import FirstMeetAvatar from '@/assets/firtmeet/avatar.jpg'
+import FirstMeetBg from '@/assets/firtmeet/bg.png'
 import { ref } from 'vue'
 const personDataArr = ref([
     {
         name: '月晕',
-        avter: '/src/assets/yueyun/avter.jpg',
-        bg: '/src/assets/yueyun/bg.png',
+        avter: YueyunAvatar,
+        bg: YueyunBg,
         blogUrl: 'https://blog.apprehen.space',
     },
     {
         name: 'firtmeet',
-        avter: '/src/assets/firtmeet/avter.jpg',
-        bg: '/src/assets/firtmeet/bg.png',
+        avter: FirstMeetAvatar,
+        bg: FirstMeetBg,
         blogUrl: 'https://firstmeet.store/',
     },
 ])
