@@ -4,30 +4,26 @@ import multer from '@koa/multer'
 import { usePrinter } from './functions.js'
 
 const router = new Router()
-const baseURL = './static/upload/'
+const baseURL = './static/print/'
 
 router.get('/print', (ctx) => {
-    // 唤醒打印机
-    shell.exec('cupsenable DeskJet-1110')
-    // 等待1s后打印
-    setTimeout(() => {
-        console.log('printing...')
-        // 获取./static/upload/下的所有文件名
-        let files = shell.ls('./static/upload')
-        // 打印文件名
-        files.forEach((file) => {
-            usePrinter(baseURL + file)
-            console.log(file)
-        })
-        // 打印成功后删除文件
-        shell.rm('-rf', './static/upload/*')
-        // print()
-        ctx.body = 'success'
-    }, 1000)
+    ctx.status = 200
+    console.log('printing...')
+    // 获取./static/print/下的所有文件名
+    let files = shell.ls('./static/print')
+    // 打印文件名
+    files.forEach((file) => {
+        usePrinter(baseURL + file)
+        console.log(file)
+    })
+    // 打印成功后删除文件
+    shell.rm('-rf', './static/print/*')
+    // print()
+    ctx.body = 'success'
 })
 
 router.get('/delete', (ctx) => {
-    shell.rm('-rf', './static/upload/*')
+    shell.rm('-rf', './static/print/*')
     ctx.body = 'success'
 })
 
@@ -39,7 +35,7 @@ router.get('/stop', (ctx) => {
 router.post(
     '/files',
     multer({
-        dest: './static/upload',
+        dest: './static/print',
     }).any(),
     (ctx) => {
         console.log(ctx.request.files)

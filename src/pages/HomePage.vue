@@ -49,11 +49,12 @@ onMounted(() => {
 })
 // 用于让UtilCard拿到window对象
 const myWindow = ref(null)
+// footer: 'Available' | 'Fixing' | 'Developing'
 const cardData = [
     {
         title: '社团打印机',
         content: '上传文件并通过社团实体打印机打印',
-        footer: 'Fixing',
+        footer: 'Available',
         router: '/print',
         icon: markRaw(printer),
     },
