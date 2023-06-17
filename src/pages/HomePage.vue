@@ -83,6 +83,12 @@ const cardData = [
         router: '/music/getvip',
     },
     {
+        title: 'ChatGPT',
+        content: 'HW部署的ChatGPT Web端应用',
+        footer: 'Available',
+        link: 'http://chat.helloworld-hdu.com:81',
+    },
+    {
         title: 'Chiya控制台',
         content: 'Chiya的koishi控制台',
         footer: 'Available',
