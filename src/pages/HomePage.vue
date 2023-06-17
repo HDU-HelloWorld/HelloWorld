@@ -36,6 +36,7 @@
 
 <script setup>
 import { markRaw, onMounted, ref } from 'vue'
+import { baseUrl, chatUrl } from '../../config'
 import { useRouter } from 'vue-router'
 import DefaultIcon from '../assets/svg/DefaultIcon.vue'
 import KoishiIcon from '../assets/svg/KoishiIcon.vue'
@@ -86,14 +87,14 @@ const cardData = [
         title: 'ChatGPT',
         content: 'HW部署的ChatGPT Web端应用',
         footer: 'Available',
-        link: 'http://chat.helloworld-hdu.com:81',
+        link: chatUrl,
     },
     {
         title: 'Chiya控制台',
         content: 'Chiya的koishi控制台',
         footer: 'Available',
         router: '',
-        link: 'http://124.221.89.187:7140',
+        link: `${baseUrl}:7140`,
         icon: markRaw(KoishiIcon),
     },
 ]
