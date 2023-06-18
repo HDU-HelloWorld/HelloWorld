@@ -140,6 +140,6 @@ let pointTip = ref(props.footer.toLocaleLowerCase())
     }
 
     cursor: pointer;
-    transition: all 0.5s;
+    transition: all 500ms ease-in-out;
 }
 </style>

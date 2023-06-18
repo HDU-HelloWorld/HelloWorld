@@ -103,6 +103,20 @@ const router = useRouter()
 
 onMounted(() => {
     myWindow.value = window
+
+    // TODO: 没有平滑过渡动画
+    let userClientWidth = document.documentElement.clientWidth
+    // console.log(userClientWidth)
+    let cardAmount = Math.floor(userClientWidth / 410)
+    const cardContent = document.querySelector('.card-content')
+    cardContent.style.width = `${cardAmount * 410}px`
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', () => {
+        userClientWidth = document.documentElement.clientWidth
+        cardAmount = Math.floor(userClientWidth / 410)
+        cardContent.style.width = `${cardAmount * 410}px`
+    })
 })
 </script>
 
@@ -110,7 +124,6 @@ onMounted(() => {
 .page {
     width: 100vw;
     height: 100vh;
-    transition: all 0.3s ease-in-out;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -131,7 +144,7 @@ onMounted(() => {
             justify-content: center;
             border: 3px solid #000;
             cursor: pointer;
-            transition: all 0.3s ease-in-out;
+            // transition: all 0.3s ease-in-out;
 
             &:hover {
                 border: 3px solid #000;
@@ -157,8 +170,8 @@ onMounted(() => {
         }
 
         .card-content {
+            transition: all 0.3s ease-in-out;
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
         }
     }
