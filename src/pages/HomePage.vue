@@ -90,6 +90,14 @@ const cardData = [
         link: chatUrl,
     },
     {
+        title: 'Clash',
+        content: 'Clash Dashboard控制台',
+        footer: 'Available',
+        router: '',
+        link: `${baseUrl}:8081`,
+        icon: markRaw(KoishiIcon),
+    },
+    {
         title: 'Chiya控制台',
         content: 'Chiya的koishi控制台',
         footer: 'Available',
