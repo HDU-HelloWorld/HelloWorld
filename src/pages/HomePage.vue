@@ -111,7 +111,6 @@ const router = useRouter()
 
 onMounted(() => {
     myWindow.value = window
-
     // TODO: 没有平滑过渡动画
     let userClientWidth = document.documentElement.clientWidth
     // console.log(userClientWidth)
