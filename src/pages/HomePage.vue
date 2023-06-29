@@ -38,7 +38,6 @@
 import { markRaw, onMounted, ref } from 'vue'
 import { baseUrl, chatUrl } from '../../config'
 import { useRouter } from 'vue-router'
-
 import DefaultIcon from '../assets/svg/DefaultIcon.vue'
 import KoishiIcon from '../assets/svg/KoishiIcon.vue'
 import printer from '../assets/svg/PrinterIcon.vue'
