@@ -36,8 +36,8 @@
 
 <script setup>
 import { markRaw, onMounted, ref } from 'vue'
-import { baseUrl, chatUrl } from '../../config'
 import { useRouter } from 'vue-router'
+import { baseUrl, chatUrl } from '../../config'
 import DefaultIcon from '../assets/svg/DefaultIcon.vue'
 import KoishiIcon from '../assets/svg/KoishiIcon.vue'
 import printer from '../assets/svg/PrinterIcon.vue'
@@ -151,6 +151,7 @@ onMounted(() => {
             justify-content: center;
             border: 3px solid #000;
             cursor: pointer;
+            user-select: none;
             // transition: all 0.3s ease-in-out;
 
             &:hover {
