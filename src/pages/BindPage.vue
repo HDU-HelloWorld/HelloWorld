@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import axios from 'axios'
 import { baseUrl } from '../../config'
 import { ElMessage } from 'element-plus'
@@ -43,7 +43,7 @@ const formLabelAlign = reactive({
     HDUkey: '',
 })
 
-const ruleFormRef = reactive()
+const ruleFormRef = ref()
 
 const ruleForm = reactive({
     stuNum: [

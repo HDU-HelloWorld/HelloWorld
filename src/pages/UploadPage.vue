@@ -13,7 +13,7 @@ const formData = reactive({
 })
 const fileList = ref([])
 
-const formRef = reactive()
+const formRef = ref()
 const rules = reactive({
     name: [
         {
