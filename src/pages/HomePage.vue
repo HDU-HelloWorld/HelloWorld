@@ -105,6 +105,12 @@ const cardData = [
         link: `${baseUrl}:7140`,
         icon: markRaw(KoishiIcon),
     },
+    {
+        title: 'HDU账号绑定',
+        content: '绑定HDU账号，获取服务',
+        footer: 'Developing',
+        router: '/bind',
+    },
 ]
 
 const router = useRouter()

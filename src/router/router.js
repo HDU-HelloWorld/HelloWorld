@@ -6,6 +6,7 @@ const GetvipPage = () => import('../pages/Utils/GetvipPage.vue')
 const LoginPage = () => import('../pages/Auth/LoginPage.vue')
 const printer = () => import('../pages/PrinterPage.vue')
 const homework = () => import('../pages/UploadPage.vue')
+const bind = () => import('../pages/BindPage.vue')
 
 const routes = [
     {
@@ -42,6 +43,11 @@ const routes = [
         path: '/link',
         name: 'link',
         component: () => import('../pages/LinkPage.vue'),
+    },
+    {
+        path: '/bind',
+        name: 'bind',
+        component: bind,
     },
 ]
 

@@ -3,9 +3,10 @@ import Koa from 'koa'
 import Router from 'koa-router'
 import cors from 'koa2-cors'
 import bodyParser from 'koa-bodyparser'
-// 打印机路由
+// 引入api路由
 import printer from './api/printer/index.js'
-import uploader from './api/uploader/index.js'
+import uploader from './api/upLoader/index.js'
+import binder from './api/bind/index.js'
 //引入数据库
 
 //数据库操作封装
@@ -22,6 +23,8 @@ const router = new Router()
 router.use('/printer', printer.routes())
 // 将上传相关的功能的根路由设置为/upLoader
 router.use('/uploader', uploader.routes())
+// 将HDU绑定相关的功能的根路由设置为/bind
+router.use('/binder', binder.routes())
 
 app.use(bodyParser())
 // 跨域设置
