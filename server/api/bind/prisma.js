@@ -5,9 +5,9 @@ class bindClient {
         this.prisma = new PrismaClient()
     }
     async createUser(user) {
-        const newUser = await this.prisma.user.create({
+        const newUser = await this.prisma.hdu_auto_sign_user.create({
             data: {
-                user_qq: user.QQnum,
+                user_qq: Number.parseInt(user.QQnum),
                 hdu_account: user.stuNum,
                 hdu_password: user.HDUkey,
             },

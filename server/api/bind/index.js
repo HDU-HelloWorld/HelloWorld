@@ -7,9 +7,9 @@ const client = new bindClient()
 router.post('/bind', async (ctx) => {
     let user = ctx.request.body
     try {
-        let newUser = await client.createUser(user)
+        await client.createUser(user)
         ctx.status = 200
-        ctx.body = newUser
+        ctx.body = 'success'
     } catch (err) {
         ctx.status = 500
         ctx.body = err

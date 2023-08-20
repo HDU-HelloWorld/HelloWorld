@@ -19,6 +19,11 @@ const app = new Koa()
 // 创建路由实例
 const router = new Router()
 
+router.get('/', async (ctx) => {
+    ctx.body = 'Hello World'
+    // await next()
+})
+
 // 将打印机相关的功能的根路由设置为/printer
 router.use('/printer', printer.routes())
 // 将上传相关的功能的根路由设置为/upLoader
