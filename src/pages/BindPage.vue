@@ -46,45 +46,45 @@ const formLabelAlign = reactive({
 const ruleFormRef = ref()
 
 const ruleForm = reactive({
-    // stuNum: [
-    //     {
-    //         required: true,
-    //         message: 'Please input Activity stuNum',
-    //         trigger: 'blur',
-    //     },
-    //     { min: 8, max: 8, message: 'Length should be 8', trigger: 'blur' },
-    // ],
-    // QQnum: [
-    //     {
-    //         required: true,
-    //         message: 'Please select Activity QQnum',
-    //         trigger: 'blur',
-    //     },
-    // ],
-    // HDUkey: [
-    //     {
-    //         required: true,
-    //         message: 'Please select Activity dep',
-    //         trigger: 'change',
-    //     },
-    // ],
+    stuNum: [
+        {
+            required: true,
+            message: 'Please input Activity stuNum',
+            trigger: 'blur',
+        },
+        { min: 8, max: 8, message: 'Length should be 8', trigger: 'blur' },
+    ],
+    QQnum: [
+        {
+            required: true,
+            message: 'Please select Activity QQnum',
+            trigger: 'blur',
+        },
+    ],
+    HDUkey: [
+        {
+            required: true,
+            message: 'Please select Activity dep',
+            trigger: 'change',
+        },
+    ],
 })
 
 const submitForm = async (formEl) => {
-    // if (!formEl) return
-    try {
-        let res = await axios.post(bindUrl + '/bind', formLabelAlign)
-        console.log(res)
-        ElMessage({
-            message: '绑定成功',
-            type: 'success',
-        })
-    } catch (e) {
-        ElMessage.error('绑定失败,请核对信息')
-    }
+    if (!formEl) return
     await formEl.validate(async (valid, fields) => {
         if (valid) {
-            console.log('submit!')
+            try {
+                let res = await axios.post(bindUrl + '/bind', formLabelAlign)
+                console.log(res)
+                ElMessage({
+                    message: '绑定成功',
+                    type: 'success',
+                })
+            } catch (e) {
+                console.log(e)
+                ElMessage.error('绑定失败,请核对信息')
+            }
         } else {
             console.log('error submit!', fields)
         }
