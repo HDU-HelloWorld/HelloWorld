@@ -24,8 +24,7 @@ router.post(
         let fileData = fs.Stats(
             './static/upload/' + ctx.request.files[0].filename
         )
-        console.log(body)
-        console.log(fileData)
+        console.log('fileData' + fileData)
         fs.renameSync(
             './static/upload/' + ctx.request.files[0].filename,
             dir + '/' + body.stuNum + '-' + body.name + '-' + body.id

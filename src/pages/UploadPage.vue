@@ -68,8 +68,8 @@ const depOptions = ref([
 
 const timeOptions = reactive([
     {
-        value: 'time',
-        label: '时间',
+        value: '二面',
+        label: '二面题目',
     },
 ])
 
@@ -114,7 +114,7 @@ const beforeUpload = (rawFile) => {
 const beforeRemove = async (uploadFile, uploadFiles) => {
     console.log('uploadFile', uploadFile)
     console.log('uploadFiles', uploadFiles)
-    let res = await axios.post(baseUrl + 'upLoader/delete', {
+    let res = await axios.post(baseUrl + '/uploader/delete', {
         id: uploadFile.uid,
         name: formData.name,
         stuNum: formData.stuNum,
@@ -226,7 +226,7 @@ const beforeRemove = async (uploadFile, uploadFiles) => {
                 v-model="fileList"
                 class="upload-demo"
                 drag
-                :action="baseUrl + 'upLoader/upload'"
+                :action="baseUrl + '/uploader/upload'"
                 :data="formData"
                 :name="
                     formData.stuNum + '-' + formData.name + '-' + formData.time
