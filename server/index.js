@@ -20,8 +20,8 @@ const app = new Koa()
 const router = new Router()
 
 router.get('/', async (ctx) => {
-    ctx.body = 'Hello World'
-    // await next()
+  ctx.body = 'Hello World'
+  // await next()
 })
 
 // 将打印机相关的功能的根路由设置为/printer
@@ -40,5 +40,5 @@ app.use(router.routes())
 const PORT = 6600
 
 app.listen(PORT, () => {
-    console.log(`starting at http://127.0.0.1:${PORT}`)
+  console.log(`starting at http://127.0.0.1:${PORT}`)
 })
