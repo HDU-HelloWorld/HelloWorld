@@ -17,7 +17,7 @@ import Prism from 'prismjs'
 import 'prismjs/components/prism-json'
 
 VMdEditor.use(vuepressTheme, {
-    Prism,
+  Prism,
 })
 import './assets/css/reset.css'
 const app = createApp(App)
