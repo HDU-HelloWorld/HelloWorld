@@ -7,7 +7,8 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "@koa/cors": "^4.0.0",
