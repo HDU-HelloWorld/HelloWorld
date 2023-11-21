@@ -57,14 +57,14 @@ const ruleForm = reactive({
   user_id: [
     {
       required: true,
-      message: 'Please select Activity QQnum',
+      message: 'Please input Activity Verification code',
       trigger: 'blur',
     },
   ],
   hdu_pin: [
     {
       required: true,
-      message: 'Please select Activity dep',
+      message: 'Please input Activity hdu_pin',
       trigger: 'change',
     },
   ],
