@@ -229,6 +229,7 @@ model hdu_auto_sign_user {
   sports_password     String?
   total_run_times     Int?
   course_auto_push    Boolean?  @default(true)
+  new_user_qq         BigInt?
 
   @@unique([user_qq, hdu_account], map: "hdu_punch_idx1")
 }
@@ -458,4 +459,13 @@ model word_bank2 {
   create_time DateTime @db.Timestamp(6)
   update_time DateTime @db.Timestamp(6)
   to_me       String?  @db.VarChar(255)
+}
+
+model new_hdu_user_info {
+  id          Int     @id @default(autoincrement())
+  user_id     String  @db.VarChar
+  hdu_account String  @db.VarChar(10)
+  hdu_pin     String  @db.VarChar
+
+  @@unique(hdu_account, map: "new_hdu_user_info_idx1")
 }

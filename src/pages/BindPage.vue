@@ -9,14 +9,14 @@
         style="max-width: 500px"
         :rules="ruleForm"
       >
-        <el-form-item label="学号" prop="stuNum">
-          <el-input v-model="formLabelAlign.stuNum" />
+        <el-form-item label="学号" prop="hdu_account">
+          <el-input v-model="formLabelAlign.hdu_account" />
         </el-form-item>
-        <el-form-item label="QQ号" prop="QQnum">
-          <el-input v-model="formLabelAlign.QQnum" />
+        <el-form-item label="hdu密码" prop="hdu_pin">
+          <el-input v-model="formLabelAlign.hdu_pin" />
         </el-form-item>
-        <el-form-item label="hdu密码" prop="HDUkey">
-          <el-input v-model="formLabelAlign.HDUkey" />
+        <el-form-item label="验证码" prop="user_id">
+          <el-input v-model="formLabelAlign.user_id" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm(ruleFormRef)">
@@ -38,15 +38,15 @@ import { ElMessage } from 'element-plus'
 const bindUrl = baseUrl + '/binder'
 
 const formLabelAlign = reactive({
-  stuNum: '',
-  QQnum: '',
-  HDUkey: '',
+  user_id: '',
+  hdu_pin: '',
+  hdu_account: '',
 })
 
 const ruleFormRef = ref()
 
 const ruleForm = reactive({
-  stuNum: [
+  hdu_account: [
     {
       required: true,
       message: 'Please input Activity stuNum',
@@ -54,14 +54,14 @@ const ruleForm = reactive({
     },
     { min: 8, max: 8, message: 'Length should be 8', trigger: 'blur' },
   ],
-  QQnum: [
+  user_id: [
     {
       required: true,
       message: 'Please select Activity QQnum',
       trigger: 'blur',
     },
   ],
-  HDUkey: [
+  hdu_pin: [
     {
       required: true,
       message: 'Please select Activity dep',
@@ -76,11 +76,19 @@ const submitForm = async (formEl) => {
     if (valid) {
       try {
         let res = await axios.post(bindUrl + '/bind', formLabelAlign)
-        console.log(res)
-        ElMessage({
-          message: '绑定成功',
-          type: 'success',
-        })
+        const resType = res.data
+        console.log(resType)
+        if (resType === 'update') {
+          ElMessage({
+            message: '覆盖数据',
+            type: 'success',
+          })
+        } else if (resType === 'create') {
+          ElMessage({
+            message: '创建数据',
+            type: 'success',
+          })
+        }
       } catch (e) {
         console.log(e)
         ElMessage.error('绑定失败,请核对信息')
