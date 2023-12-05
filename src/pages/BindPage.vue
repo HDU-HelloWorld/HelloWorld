@@ -15,7 +15,7 @@
         <el-form-item label="hdu密码" prop="hdu_pin">
           <el-input v-model="formLabelAlign.hdu_pin" />
         </el-form-item>
-        <el-form-item label="验证码" prop="user_id">
+        <el-form-item label="验证码" :prop="findStr">
           <el-input v-model="formLabelAlign[findStr]" />
         </el-form-item>
         <el-form-item>
@@ -68,7 +68,7 @@ const ruleForm = reactive({
       trigger: 'blur',
     },
   ],
-  hdu_pin: [
+  [findStr]: [
     {
       required: true,
       message: 'Please input Activity hdu_pin',
