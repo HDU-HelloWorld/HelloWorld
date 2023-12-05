@@ -6,6 +6,13 @@ const router = new Router()
 
 router.post('/bind', async (ctx) => {
   let user = ctx.request.body
+  let findStr = ''
+  if (user.user_id_qq) {
+    findStr = 'user_id_qq'
+  } else {
+    findStr = 'user_id_qqguild'
+  }
+  console.log(findStr)
   console.log(user)
   let res = await prisma.new_hdu_user_info.findUnique({
     where: {
@@ -18,7 +25,7 @@ router.post('/bind', async (ctx) => {
     let userData = {
       hdu_account: user.hdu_account,
       hdu_pin: user.hdu_pin,
-      user_id: user.user_id,
+      [findStr]: user[findStr],
     }
     res = await prisma.new_hdu_user_info.create({
       data: userData,
@@ -33,7 +40,7 @@ router.post('/bind', async (ctx) => {
       },
       data: {
         hdu_pin: user.hdu_pin,
-        user_id: user.user_id,
+        [findStr]: user[findStr],
       },
     })
     console.log('update', res)
